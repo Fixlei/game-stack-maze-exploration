@@ -1,0 +1,150 @@
+# Stack Maze Explorer
+
+A maze exploration game built on the **Stack** data structure, demonstrating classic stack applications in Depth-First Search (DFS), path backtracking, and undo operations.
+
+##  Screenshots
+
+<!-- After running the game, take screenshots and place them in the screenshots/ folder -->
+<!-- Then uncomment the lines below -->
+
+<!-- ![Main Menu](screenshots/main_menu.png) -->
+<!-- ![Gameplay](screenshots/gameplay.png) -->
+<!-- ![Auto Solve](screenshots/auto_solve.png) -->
+<!-- ![Victory](screenshots/victory.png) -->
+
+## Features
+
+- **Manual Mode** — Use WASD to navigate the maze
+- **Auto Solver** — Stack-based DFS algorithm finds the exit automatically
+- **Undo** — Stack-powered unlimited undo (press U)
+- **Random Mazes** — Every maze is randomly generated using stack-based DFS
+- **Live Stack View** — Watch the stack change in real time
+- **Step Counter** — Tracks your moves
+
+## Stack Applications in This Project
+
+| Application | Description |
+|-------------|-------------|
+| DFS Maze Generation | Stack replaces recursion for random wall carving |
+| DFS Maze Solving | Stack stores the search path, pops on dead ends |
+| Undo Operation | Each move is pushed; undo pops to restore state |
+| Path Backtracking | Dead end → pop from stack → try another direction |
+
+## Quick Start
+
+### Prerequisites
+
+- Java JDK 8 or higher
+- A terminal that supports ANSI colors (Linux/macOS Terminal, Windows Terminal, Git Bash)
+
+### Step 1 — Clone the Repository
+
+```bash
+git clone https://github.com/your-username/stack-maze-explorer.git
+cd stack-maze-explorer
+```
+
+### Step 2 — Compile
+
+```bash
+javac -d out src/*.java
+```
+
+This creates compiled `.class` files in the `out/` directory.
+
+### Step 3 — Run
+
+```bash
+java -cp out MazeGame
+```
+
+You should see the welcome screen. Press **Enter** to start.
+
+### Step 4 — Play
+
+```
+W / ↑  — Move up
+S / ↓  — Move down
+A / ←  — Move left
+D / →  — Move right
+U      — Undo last move (stack pop!)
+R      — Generate a new random maze
+P      — Auto-solve with DFS (watch the stack work)
+Q      — Quit
+```
+
+### Step 5 — Take Screenshots for README
+
+**On macOS:**
+```bash
+# Full screen
+Cmd + Shift + 3
+
+# Selected area
+Cmd + Shift + 4
+```
+
+**On Windows:**
+```bash
+# Snipping Tool
+Win + Shift + S
+```
+
+**On Linux:**
+```bash
+# Using gnome-screenshot
+gnome-screenshot -a
+```
+
+Then save screenshots to the `screenshots/` folder:
+
+```bash
+mkdir -p screenshots
+# Move your screenshots into this folder, for example:
+mv ~/Desktop/Screenshot*.png screenshots/
+```
+
+### Step 6 — Add Screenshots to README
+
+Open this `README.md` and uncomment the image lines at the top, updating filenames:
+
+```markdown
+![Main Menu](screenshots/main_menu.png)
+![Gameplay](screenshots/gameplay.png)
+![Auto Solve](screenshots/auto_solve.png)
+![Victory](screenshots/victory.png)
+```
+
+## Project Structure
+
+```
+stack-maze-explorer/
+├── src/
+│   ├── MazeGame.java          # Main entry + game loop
+│   ├── GameStack.java         # Custom stack implementation
+│   ├── MazeGenerator.java     # Maze generator (DFS + stack)
+│   ├── MazeSolver.java        # Maze solver (DFS + stack)
+│   ├── Position.java          # Grid position class
+│   └── MazeRenderer.java      # Console renderer with ANSI colors
+├── screenshots/                # Your game screenshots go here
+│   ├── main_menu.png
+│   ├── gameplay.png
+│   ├── auto_solve.png
+│   └── victory.png
+├── README.md
+├── .gitignore
+└── LICENSE
+```
+
+## Core Algorithm — Stack-Based DFS Maze Solving
+
+```
+1. Push start position onto stack
+2. Loop until stack is empty or exit is found:
+   a. Peek at stack top (current position)
+   b. If it's the exit → success! Stack contents = solution path
+   c. If there's an unvisited neighbor → push it onto stack
+   d. If no unvisited neighbors → pop (backtrack)
+3. Empty stack = no solution exists
+```
+
